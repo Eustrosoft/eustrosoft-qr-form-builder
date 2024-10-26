@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AppRoutes } from './app.constants';
+import { AppRoutes } from './app.constant';
 import { FormConstructorComponent } from './pages/form-constructor/form-constructor.component';
 
 export const routes: Routes = [

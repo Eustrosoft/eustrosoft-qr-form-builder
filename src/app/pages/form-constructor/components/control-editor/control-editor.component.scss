@@ -1,0 +1,6 @@
+@use 'mixins' as mixins;
+
+:host {
+  flex: 0 1 mixins.rem(1140);
+  display: flex;
+}

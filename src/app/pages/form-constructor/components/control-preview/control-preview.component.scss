@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+@use 'mixins' as mixins;
+@use 'sass:map';
+
+:host {
+  color: map.get(map.get(mat.$azure-palette, secondary), 40);
+  cursor: pointer;
+  display: block;
+  padding: mixins.rem(16);
+  font-size: mixins.rem(20);
+  background: map.get(mat.$azure-palette, 95);
+  border-radius: mixins.rem(8);
+}

@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+:host {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
+  max-width: 1440px;
+  background: map.get(map.get(mat.$azure-palette, neutral), 99);
+}

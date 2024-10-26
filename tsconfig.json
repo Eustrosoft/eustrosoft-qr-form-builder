@@ -3,6 +3,16 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@assets/*": ["assets/*"],
+      "@cdk/*": ["app/core/cdk/*"],
+      "@core/*": ["app/core/*"],
+      "@environment": ["environments/environment.ts"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
