@@ -1,1 +1,15 @@
-<p>control-editor works!</p>
+<flex-block flexDirection="column">
+  @for (formField of formFieldList(); track index; let index = $index) {
+    <!-- TODO Сделать обертку <editable-component> -->
+    <!-- TODO Сделать возможность передавать в <editable-component> поля для редактирования настроек конкретного поля -->
+    @if (formField.controlElement === 'input') {
+      <input-element />
+    }
+    @if (formField.controlElement === 'select') {
+      <select-element />
+    }
+    @if (formField.controlElement === 'datepicker') {
+      <datepicker-element />
+    }
+  }
+</flex-block>

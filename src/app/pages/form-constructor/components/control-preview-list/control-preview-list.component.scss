@@ -5,4 +5,5 @@
   flex: 0 1 mixins.rem(300);
   display: flex;
   flex-wrap: wrap;
+  align-self: flex-start;
 }

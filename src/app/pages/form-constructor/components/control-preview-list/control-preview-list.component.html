@@ -1,3 +1,3 @@
-@for (formEl of formElementList(); track formEl.name) {
-  <control-preview [name]="formEl.name" [control]="formEl.control" (controlClick)="addControlToEditor($event)" />
+@for (formEl of formElementList(); track formEl.label) {
+  <control-preview [name]="formEl.label" [controlElement]="formEl.controlElement" (controlElementClick)="addControlToEditor($event)" />
 }

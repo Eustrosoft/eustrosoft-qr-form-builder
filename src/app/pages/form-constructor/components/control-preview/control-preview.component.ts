@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { Controls } from '@app/pages/form-constructor/form-constructor.model';
+import { ControlElement } from '@app/pages/form-constructor/form-constructor.model';
 
 @Component({
   selector: 'control-preview',
@@ -14,11 +14,11 @@ import { Controls } from '@app/pages/form-constructor/form-constructor.model';
 })
 export class ControlPreviewComponent {
   public readonly name = input.required<string>();
-  public readonly control = input.required<Controls>();
+  public readonly controlElement = input.required<ControlElement>();
 
-  public readonly controlClick = output<Controls>();
+  public readonly controlElementClick = output<ControlElement>();
 
   protected onControlClick(): void {
-    this.controlClick.emit(this.control());
+    this.controlElementClick.emit(this.controlElement());
   }
 }
