@@ -1,10 +1,9 @@
 import angularEslint from '@angular-eslint/eslint-plugin';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
+import { fileURLToPath } from 'node:url';
 import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -35,7 +34,6 @@ export default [
     languageOptions: {
       ecmaVersion: 5,
       sourceType: 'script',
-
       parserOptions: {
         project: ['tsconfig.json'],
         createDefaultProgram: true,
@@ -105,7 +103,6 @@ export default [
         'error',
         {
           accessibility: 'explicit',
-
           overrides: {
             accessors: 'off',
             constructors: 'no-public',
