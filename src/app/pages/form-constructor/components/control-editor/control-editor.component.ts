@@ -6,11 +6,13 @@ import { InputElementComponent } from '@app/pages/form-constructor/components/in
 import { SelectElementComponent } from '@app/pages/form-constructor/components/select-element/select-element.component';
 import { DatepickerElementComponent } from '@app/pages/form-constructor/components/datepicker-element/datepicker-element.component';
 import { FormElementService } from '@app/pages/form-constructor/services/form-element.service';
+import { MatButton } from '@angular/material/button';
+import { InputElementSettingsComponent } from '@app/pages/form-constructor/components/input-element-settings/input-element-settings.component';
 
 @Component({
   selector: 'control-editor',
   standalone: true,
-  imports: [FlexBlockComponent, InputElementComponent, SelectElementComponent, DatepickerElementComponent],
+  imports: [FlexBlockComponent, InputElementComponent, SelectElementComponent, DatepickerElementComponent, MatButton, InputElementSettingsComponent],
   templateUrl: './control-editor.component.html',
   styleUrl: './control-editor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,4 +25,6 @@ export class ControlEditorComponent implements OnInit {
   public ngOnInit(): void {
     console.log('ngOnInit');
   }
+
+  protected changeInputSettings(event: unknown, index: number): void {}
 }

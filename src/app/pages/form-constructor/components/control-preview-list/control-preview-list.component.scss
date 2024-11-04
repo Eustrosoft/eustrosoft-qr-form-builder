@@ -2,8 +2,10 @@
 
 :host {
   gap: mixins.rem(16);
-  flex: 0 1 mixins.rem(300);
+  flex: 0 1 mixins.rem(500);
   display: flex;
-  flex-wrap: wrap;
-  align-self: flex-start;
+  padding: mixins.rem(16);
+  background: white;
+  border-radius: mixins.rem(4);
+  flex-direction: column;
 }

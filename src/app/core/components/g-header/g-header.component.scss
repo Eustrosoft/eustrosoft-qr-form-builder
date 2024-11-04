@@ -1,0 +1,10 @@
+@use 'styles/mixins' as mixins;
+
+:host {
+  display: flex;
+  padding: mixins.rem(16) mixins.rem(32);
+
+  h2 {
+    margin: 0;
+  }
+}

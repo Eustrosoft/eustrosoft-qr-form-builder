@@ -8,6 +8,8 @@ import { AppState } from './store/app.state';
 import { FormConstructorState } from './pages/form-constructor/store/form-constructor.state';
 import { providePipes } from '@core/providers/pipe.provider';
 import { provideStore } from '@ngxs/store';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
+import { MAT_CARD_CONFIG, MatCardConfig } from '@angular/material/card';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideStore([AppState, FormConstructorState], withNgxsReduxDevtoolsPlugin()),
     provideAnimationsAsync(),
     providePipes(),
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: <MatFormFieldDefaultOptions>{ floatLabel: 'always', appearance: 'outline', subscriptSizing: 'dynamic' } },
+    { provide: MAT_CARD_CONFIG, useValue: <MatCardConfig>{ appearance: 'outlined' } },
   ],
 };

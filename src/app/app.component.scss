@@ -1,11 +1,13 @@
 @use '@angular/material' as mat;
+@use 'styles/mixins' as mixins;
 @use 'sass:map';
 
 :host {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  display: block;
+  display: flex;
   max-width: 1440px;
-  background: map.get(map.get(mat.$azure-palette, neutral), 99);
+  background: map.get(mat.$azure-palette, 98);
+  flex-direction: column;
 }

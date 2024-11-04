@@ -1,6 +1,11 @@
 @use 'styles/mixins' as mixins;
 
 :host {
-  flex: 0 1 mixins.rem(1140);
+  gap: mixins.rem(16);
+  flex: 0 1 mixins.rem(940);
   display: flex;
+  padding: mixins.rem(16);
+  background: white;
+  border-radius: mixins.rem(4);
+  flex-direction: column;
 }

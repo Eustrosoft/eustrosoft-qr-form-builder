@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { FormElement, FormField } from '@app/pages/form-constructor/form-constructor.model';
+import { FormElement, FormField, InputType } from '@app/pages/form-constructor/form-constructor.model';
 import { FormConstructorActions } from '@app/pages/form-constructor/store/form-constructor.actions';
 import { append, patch } from '@ngxs/store/operators';
 import { FormElementFactoryService } from '@app/pages/form-constructor/services/form-element-factory.service';
@@ -8,6 +8,7 @@ import { FormElementFactoryService } from '@app/pages/form-constructor/services/
 export interface FormConstructorStateModel {
   formElementList: FormElement[];
   formFieldList: FormField[];
+  inputTypeOptionList: InputType[];
 }
 
 @State<FormConstructorStateModel>({
@@ -17,17 +18,21 @@ export interface FormConstructorStateModel {
       {
         label: 'Input',
         controlElement: 'input',
+        placeholder: '',
       },
       {
         label: 'Select',
         controlElement: 'select',
+        placeholder: '',
       },
       {
         label: 'Datepicker',
         controlElement: 'datepicker',
+        placeholder: '',
       },
     ],
     formFieldList: [],
+    inputTypeOptionList: ['text', 'number', 'password'],
   },
 })
 @Injectable()
@@ -44,9 +49,14 @@ export class FormConstructorState {
     return state.formFieldList;
   }
 
+  @Selector()
+  public static getInputTypeOptionList$(state: FormConstructorStateModel): InputType[] {
+    return state.inputTypeOptionList;
+  }
+
   @Action(FormConstructorActions.AddInputToEditor)
   public addInputToEditor(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.AddInputToEditor): void {
-    const element = this.formElementFactoryService.makeInputElement({ type: action.inputType });
+    const element = this.formElementFactoryService.makeInputElement({ inputType: action.inputType });
 
     ctx.setState(
       patch({

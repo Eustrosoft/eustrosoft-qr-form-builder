@@ -3,7 +3,7 @@ import { DatepickerElement, InputElement, SelectElement } from '@app/pages/form-
 export namespace FormConstructorActions {
   export class AddInputToEditor {
     public static readonly type: string = '[FormConstructorActions] Add Input To Editor';
-    constructor(readonly inputType: InputElement['type'] = 'text') {}
+    constructor(readonly inputType: InputElement['inputType'] = 'text') {}
   }
 
   export class AddSelectToEditor {

@@ -1,15 +1,14 @@
-<flex-block flexDirection="column">
-  @for (formField of formFieldList(); track index; let index = $index) {
-    <!-- TODO Сделать обертку <configurable-element> -->
-    <!-- TODO Сделать возможность передавать в <configurable-element> поля для редактирования настроек конкретного поля -->
-    @if (formElementService.isInputElement(formField)) {
-      <input-element />
-    }
-    @if (formElementService.isSelectElement(formField)) {
-      <select-element />
-    }
-    @if (formElementService.isDatepickerElement(formField)) {
-      <datepicker-element />
-    }
+@for (formField of formFieldList(); track index; let index = $index) {
+  @if (formElementService.isInputElement(formField)) {
+    <flex-block flexAlignItems="center">
+      <input-element [label]="formField.label" [inputType]="formField.inputType" />
+      <input-element-settings [label]="formField.label" [inputType]="formField.inputType" (settingsChanged)="changeInputSettings($event, index)" />
+    </flex-block>
   }
-</flex-block>
+  @if (formElementService.isSelectElement(formField)) {
+    <select-element />
+  }
+  @if (formElementService.isDatepickerElement(formField)) {
+    <datepicker-element />
+  }
+}
