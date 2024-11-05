@@ -42,6 +42,14 @@ export interface FormConstructorStateModel {
 })
 @Injectable()
 export class FormConstructorState {
+  /**
+   * TODO
+   *  Добавить режим предпросмотра формы
+   *  Добавить header как в qr-tiger
+   *  Продумать сериализацию формы
+   *  Закрывать settings overlay при клике вне overlay
+   */
+
   private readonly formElementFactoryService = inject(FormElementFactoryService);
 
   @Selector()
