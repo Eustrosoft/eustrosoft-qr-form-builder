@@ -2,26 +2,26 @@ import { DatepickerElement, InputElement, SelectElement } from '@app/pages/form-
 import { ConnectedPosition } from '@angular/cdk/overlay';
 
 export const INPUT_DEFAULT_PARAMS: InputElement = {
+  controlElement: 'input',
   label: 'Input',
   placeholder: '',
   hint: '',
-  controlElement: 'input',
   inputType: 'text',
 } as const;
 
 export const SELECT_DEFAULT_PARAMS: SelectElement = {
+  controlElement: 'select',
   label: 'Select',
   placeholder: '',
   hint: '',
-  controlElement: 'select',
   optionList: [],
 } as const;
 
 export const DATEPICKER_DEFAULT_PARAMS: DatepickerElement = {
+  controlElement: 'datepicker',
   label: 'Datepicker',
   placeholder: '',
   hint: '',
-  controlElement: 'datepicker',
   datepickerType: 'single',
 } as const;
 

@@ -5,7 +5,7 @@
       <input [placeholder]="placeholder()" [matDatepicker]="picker" matInput />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      @if (hint()?.length) {
+      @if (hint().length) {
         <mat-hint>{{ hint() }}</mat-hint>
       }
     </mat-form-field>
@@ -19,7 +19,7 @@
       </mat-date-range-input>
       <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
       <mat-date-range-picker #rangePicker></mat-date-range-picker>
-      @if (hint()?.length) {
+      @if (hint().length) {
         <mat-hint>{{ hint() }}</mat-hint>
       }
     </mat-form-field>

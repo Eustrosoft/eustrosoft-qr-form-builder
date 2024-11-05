@@ -5,6 +5,7 @@
   flex: 0 1 mixins.rem(720);
   display: flex;
   padding: mixins.rem(16);
+  overflow: auto;
   background: white;
   border-radius: mixins.rem(4);
   flex-direction: column;
