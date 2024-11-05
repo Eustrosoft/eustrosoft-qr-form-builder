@@ -1,18 +1,31 @@
-import { DatepickerElement, InputElement, SelectElement } from '@app/pages/form-constructor/form-constructor.model';
+import { DatepickerElement, InputElement, InputSettingsForm, SelectElement } from '@app/pages/form-constructor/form-constructor.model';
 
 export namespace FormConstructorActions {
-  export class AddInputToEditor {
-    public static readonly type: string = '[FormConstructorActions] Add Input To Editor';
+  export class AddInputElementToEditor {
+    public static readonly type: string = '[FormConstructorActions] Add Input Element To Editor';
     constructor(readonly inputType: InputElement['inputType'] = 'text') {}
   }
 
-  export class AddSelectToEditor {
-    public static readonly type: string = '[FormConstructorActions] Add Select To Editor';
+  export class AddSelectElementToEditor {
+    public static readonly type: string = '[FormConstructorActions] Add Select Element To Editor';
     constructor(readonly optionList: SelectElement['optionList'] = []) {}
   }
 
-  export class AddDatepickerToEditor {
-    public static readonly type: string = '[FormConstructorActions] Add Datepicker To Editor';
+  export class AddDatepickerElementToEditor {
+    public static readonly type: string = '[FormConstructorActions] Add Datepicker Element To Editor';
     constructor(readonly datepickerType: DatepickerElement['datepickerType'] = 'single') {}
+  }
+
+  export class PatchInputElementSettings {
+    public static readonly type: string = '[FormConstructorActions] Patch Input Element Settings';
+    constructor(
+      readonly settings: ReturnType<InputSettingsForm['getRawValue']>,
+      readonly index: number,
+    ) {}
+  }
+
+  export class RemoveFormElement {
+    public static readonly type: string = '[FormConstructorActions] Remove Form Element';
+    constructor(readonly index: number) {}
   }
 }

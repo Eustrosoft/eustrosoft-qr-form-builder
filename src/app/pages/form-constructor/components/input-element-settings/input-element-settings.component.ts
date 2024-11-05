@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
@@ -37,11 +37,12 @@ import { map } from 'rxjs';
   styleUrl: './input-element-settings.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputElementSettingsComponent {
+export class InputElementSettingsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
-  public readonly label = input<InputElement['label']>('Input');
+  public readonly label = input<InputElement['label']>('');
   public readonly placeholder = input<InputElement['placeholder']>('');
+  public readonly hint = input<InputElement['hint']>('');
   public readonly inputType = input<InputElement['inputType']>('text');
 
   protected readonly position = input<ConnectedPosition>({
@@ -49,17 +50,34 @@ export class InputElementSettingsComponent {
     originY: 'top',
     overlayX: 'start',
     overlayY: 'top',
-    offsetX: 32,
+    offsetX: 8,
   });
   protected isOpen = false;
 
   protected readonly inputTypeOptionList = select(FormConstructorState.getInputTypeOptionList$);
 
-  protected inputSettingsForm: InputSettingsForm = this.fb.group({
+  protected readonly inputSettingsForm: InputSettingsForm = this.fb.group({
     label: this.fb.nonNullable.control<string>(this.label()),
     placeholder: this.fb.nonNullable.control<string>(this.placeholder()),
+    hint: this.fb.nonNullable.control<string>(this.hint()),
     inputType: this.fb.nonNullable.control<InputType>(this.inputType()),
   });
 
-  public readonly settingsChanged = outputFromObservable(this.inputSettingsForm.valueChanges.pipe(map(() => this.inputSettingsForm.getRawValue())));
+  public readonly settingsChanged = outputFromObservable<ReturnType<InputSettingsForm['getRawValue']>>(
+    this.inputSettingsForm.valueChanges.pipe(map(() => this.inputSettingsForm.getRawValue())),
+  );
+
+  public readonly removeClicked = output<void>();
+
+  public ngOnInit(): void {
+    this.applyInputsToForm();
+  }
+
+  private applyInputsToForm(): void {
+    this.inputSettingsForm.patchValue({
+      label: this.label(),
+      placeholder: this.placeholder(),
+      inputType: this.inputType(),
+    });
+  }
 }

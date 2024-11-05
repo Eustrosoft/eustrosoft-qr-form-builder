@@ -5,9 +5,10 @@ export type InputType = 'text' | 'number' | 'password';
 export type DatepickerType = 'range' | 'single';
 
 export interface FormElement {
+  controlElement: ControlElement;
   label: string;
   placeholder: string;
-  controlElement: ControlElement;
+  hint: string;
 }
 
 export interface InputElement extends FormElement {
@@ -27,9 +28,6 @@ export type FormField = InputElement | SelectElement | DatepickerElement;
 export type InputSettingsForm = FormGroup<{
   label: FormControl<string>;
   placeholder: FormControl<string>;
+  hint: FormControl<string>;
   inputType: FormControl<InputType>;
 }>;
-
-export type InputSettingsRawValue = {
-  [K in keyof InputSettingsForm]: InputSettingsForm[K] extends FormControl<infer V> ? V : never;
-};

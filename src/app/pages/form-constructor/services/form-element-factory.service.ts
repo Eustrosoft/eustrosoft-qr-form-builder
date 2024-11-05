@@ -11,6 +11,7 @@ export class FormElementFactoryService {
       controlElement: 'input',
       label: params?.label ?? INPUT_DEFAULT_PARAMS.label,
       placeholder: params?.placeholder ?? INPUT_DEFAULT_PARAMS.placeholder,
+      hint: params?.hint ?? INPUT_DEFAULT_PARAMS.hint,
       inputType: params?.inputType ?? INPUT_DEFAULT_PARAMS.inputType,
     };
   }
@@ -20,6 +21,7 @@ export class FormElementFactoryService {
       controlElement: 'select',
       label: params?.label ?? SELECT_DEFAULT_PARAMS.label,
       placeholder: params?.placeholder ?? SELECT_DEFAULT_PARAMS.placeholder,
+      hint: params?.hint ?? SELECT_DEFAULT_PARAMS.hint,
       optionList: params?.optionList ?? SELECT_DEFAULT_PARAMS.optionList,
     };
   }
@@ -29,6 +31,7 @@ export class FormElementFactoryService {
       controlElement: 'datepicker',
       label: params?.label ?? DATEPICKER_DEFAULT_PARAMS.label,
       placeholder: params?.placeholder ?? DATEPICKER_DEFAULT_PARAMS.placeholder,
+      hint: params?.hint ?? DATEPICKER_DEFAULT_PARAMS.hint,
       datepickerType: params?.datepickerType ?? DATEPICKER_DEFAULT_PARAMS.datepickerType,
     };
   }

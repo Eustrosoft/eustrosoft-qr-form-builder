@@ -1,4 +1,7 @@
 <mat-form-field>
   <mat-label>{{ label() }}</mat-label>
-  <input [type]="inputType()" [placeholder]="placeholder()" matInput />
+  <input [type]="inputType()" [placeholder]="placeholder()" [disabled]="isDisabled()" matInput />
+  @if (hint()?.length) {
+    <mat-hint>{{ hint() }}</mat-hint>
+  }
 </mat-form-field>

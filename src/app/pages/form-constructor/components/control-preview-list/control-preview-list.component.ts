@@ -18,9 +18,9 @@ import { FlexBlockComponent } from '@core/components/flex-block/flex-block.compo
 export class ControlPreviewListComponent {
   protected readonly formElementList = select(FormConstructorState.getFormElementList$);
 
-  protected readonly addInputToEditor = dispatch(FormConstructorActions.AddInputToEditor);
-  protected readonly addSelectToEditor = dispatch(FormConstructorActions.AddSelectToEditor);
-  protected readonly addDatepickerToEditor = dispatch(FormConstructorActions.AddDatepickerToEditor);
+  protected readonly addInputToEditor = dispatch(FormConstructorActions.AddInputElementToEditor);
+  protected readonly addSelectToEditor = dispatch(FormConstructorActions.AddSelectElementToEditor);
+  protected readonly addDatepickerToEditor = dispatch(FormConstructorActions.AddDatepickerElementToEditor);
 
   protected addControlToEditor(event: ControlElement): void {
     switch (event) {

@@ -1,8 +1,13 @@
-<button (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" mat-button>Configure</button>
+<flex-block gapSize="0">
+  <button (click)="removeClicked.emit()" mat-button>Remove</button>
+  <button (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" mat-button>Configure</button>
+</flex-block>
 <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen" [cdkConnectedOverlayPositions]="[position()]">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Input</mat-card-title>
+      <mat-card-title>
+        <h5>Input</h5>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="inputSettingsForm" flex-block flexDirection="column">
@@ -13,6 +18,10 @@
         <mat-form-field>
           <mat-label>Placeholder</mat-label>
           <input [formControl]="inputSettingsForm.controls.placeholder" placeholder="Placeholder for element" matInput />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Hint</mat-label>
+          <input [formControl]="inputSettingsForm.controls.hint" placeholder="Hint for element" matInput />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Input Type</mat-label>
