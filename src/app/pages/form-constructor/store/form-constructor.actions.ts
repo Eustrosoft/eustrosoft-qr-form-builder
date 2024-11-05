@@ -1,4 +1,11 @@
-import { DatepickerElement, InputElement, InputSettingsForm, SelectElement, SelectSettingsForm } from '@app/pages/form-constructor/form-constructor.model';
+import {
+  DatepickerElement,
+  DatepickerSettingsForm,
+  InputElement,
+  InputSettingsForm,
+  SelectElement,
+  SelectSettingsForm,
+} from '@app/pages/form-constructor/form-constructor.model';
 
 export namespace FormConstructorActions {
   export class AddInputElementToEditor {
@@ -28,6 +35,14 @@ export namespace FormConstructorActions {
     public static readonly type: string = '[FormConstructorActions] Patch Select Element Settings';
     constructor(
       readonly settings: ReturnType<SelectSettingsForm['getRawValue']>,
+      readonly index: number,
+    ) {}
+  }
+
+  export class PatchDatepickerElementSettings {
+    public static readonly type: string = '[FormConstructorActions] Patch Datepicker Element Settings';
+    constructor(
+      readonly settings: ReturnType<DatepickerSettingsForm['getRawValue']>,
       readonly index: number,
     ) {}
   }

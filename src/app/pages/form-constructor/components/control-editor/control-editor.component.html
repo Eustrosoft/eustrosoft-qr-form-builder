@@ -26,6 +26,14 @@
     </flex-block>
   }
   @if (formElementService.isDatepickerElement(formField)) {
-    <datepicker-element />
+    <datepicker-element [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" [datepickerType]="formField.datepickerType" />
+    <datepicker-element-settings
+      [label]="formField.label"
+      [placeholder]="formField.placeholder"
+      [hint]="formField.hint"
+      [datepickerType]="formField.datepickerType"
+      (settingsChanged)="patchDatepickerElementSettings($event, index)"
+      (removeClicked)="removeFormElement(index)"
+    />
   }
 }

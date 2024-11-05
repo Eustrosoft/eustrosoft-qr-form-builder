@@ -8,27 +8,30 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <h5>Select</h5>
+        <h5>Datepicker</h5>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="selectSettingsForm" flex-block flexDirection="column">
+      <form [formGroup]="datepickerSettingsForm" flex-block flexDirection="column">
         <mat-form-field>
           <mat-label>Label</mat-label>
-          <input [formControl]="selectSettingsForm.controls.label" placeholder="Label for element" matInput />
+          <input [formControl]="datepickerSettingsForm.controls.label" placeholder="Label for element" matInput />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Placeholder</mat-label>
-          <input [formControl]="selectSettingsForm.controls.placeholder" placeholder="Placeholder for element" matInput />
+          <input [formControl]="datepickerSettingsForm.controls.placeholder" placeholder="Placeholder for element" matInput />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Hint</mat-label>
-          <input [formControl]="selectSettingsForm.controls.hint" placeholder="Hint for element" matInput />
+          <input [formControl]="datepickerSettingsForm.controls.hint" placeholder="Hint for element" matInput />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Option list</mat-label>
-          <input [formControl]="selectSettingsForm.controls.optionList" placeholder="Option list for select" matInput />
-          <mat-hint>Example: first,second,third</mat-hint>
+          <mat-label>Datepicker Type</mat-label>
+          <mat-select [formControl]="datepickerSettingsForm.controls.datepickerType">
+            @for (datepickerType of datepickerTypeOptionList(); track datepickerType) {
+              <mat-option [value]="datepickerType">{{ datepickerType }}</mat-option>
+            }
+          </mat-select>
         </mat-form-field>
       </form>
     </mat-card-content>

@@ -10,6 +10,7 @@ import { MatButton } from '@angular/material/button';
 import { InputElementSettingsComponent } from '@app/pages/form-constructor/components/input-element-settings/input-element-settings.component';
 import { FormConstructorActions } from '@app/pages/form-constructor/store/form-constructor.actions';
 import { SelectElementSettingsComponent } from '@app/pages/form-constructor/components/select-element-settings/select-element-settings.component';
+import { DatepickerElementSettingsComponent } from '@app/pages/form-constructor/components/datepicker-element-settings/datepicker-element-settings.component';
 
 @Component({
   selector: 'control-editor',
@@ -22,6 +23,7 @@ import { SelectElementSettingsComponent } from '@app/pages/form-constructor/comp
     MatButton,
     InputElementSettingsComponent,
     SelectElementSettingsComponent,
+    DatepickerElementSettingsComponent,
   ],
   templateUrl: './control-editor.component.html',
   styleUrl: './control-editor.component.scss',
@@ -34,5 +36,6 @@ export class ControlEditorComponent {
 
   protected readonly patchInputElementSettings = dispatch(FormConstructorActions.PatchInputElementSettings);
   protected readonly patchSelectElementSettings = dispatch(FormConstructorActions.PatchSelectElementSettings);
+  protected readonly patchDatepickerElementSettings = dispatch(FormConstructorActions.PatchDatepickerElementSettings);
   protected readonly removeFormElement = dispatch(FormConstructorActions.RemoveFormElement);
 }

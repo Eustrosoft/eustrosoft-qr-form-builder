@@ -43,7 +43,7 @@ export class SelectElementSettingsComponent implements OnInit {
   public readonly label = input<SelectElement['label']>('');
   public readonly placeholder = input<SelectElement['placeholder']>('');
   public readonly hint = input<SelectElement['hint']>('');
-  public readonly optionList = input<SelectElement['optionList']>([]);
+  public readonly optionList = input<string, SelectElement['optionList']>('', { transform: (value) => value.join(',') });
 
   protected readonly SETTINGS_OVERLAY_POSITION_RIGHT = SETTINGS_OVERLAY_POSITION_RIGHT;
 
@@ -51,7 +51,7 @@ export class SelectElementSettingsComponent implements OnInit {
     label: this.fb.nonNullable.control<string>(this.label()),
     placeholder: this.fb.nonNullable.control<string>(this.placeholder()),
     hint: this.fb.nonNullable.control<string>(this.hint()),
-    optionList: this.fb.nonNullable.control<string[]>(this.optionList()),
+    optionList: this.fb.nonNullable.control<string>(this.optionList()),
   });
 
   public readonly settingsChanged = outputFromObservable<ReturnType<SelectSettingsForm['getRawValue']>>(

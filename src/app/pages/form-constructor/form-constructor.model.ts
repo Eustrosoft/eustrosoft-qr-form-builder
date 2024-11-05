@@ -36,5 +36,12 @@ export type SelectSettingsForm = FormGroup<{
   label: FormControl<string>;
   placeholder: FormControl<string>;
   hint: FormControl<string>;
-  optionList: FormControl<string[]>;
+  optionList: FormControl<string>;
+}>;
+
+export type DatepickerSettingsForm = FormGroup<{
+  label: FormControl<string>;
+  placeholder: FormControl<string>;
+  hint: FormControl<string>;
+  datepickerType: FormControl<DatepickerType>;
 }>;

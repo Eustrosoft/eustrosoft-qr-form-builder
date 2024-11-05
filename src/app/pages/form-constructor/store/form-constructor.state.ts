@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { FormElement, FormField, InputType } from '@app/pages/form-constructor/form-constructor.model';
+import { DatepickerType, FormElement, FormField, InputType } from '@app/pages/form-constructor/form-constructor.model';
 import { FormConstructorActions } from '@app/pages/form-constructor/store/form-constructor.actions';
 import { append, patch, removeItem, updateItem } from '@ngxs/store/operators';
 import { FormElementFactoryService } from '@app/pages/form-constructor/services/form-element-factory.service';
@@ -9,6 +9,7 @@ export interface FormConstructorStateModel {
   formElementList: FormElement[];
   formFieldList: FormField[];
   inputTypeOptionList: InputType[];
+  datepickerTypeOptionList: DatepickerType[];
 }
 
 @State<FormConstructorStateModel>({
@@ -36,6 +37,7 @@ export interface FormConstructorStateModel {
     ],
     formFieldList: [],
     inputTypeOptionList: ['text', 'number', 'password'],
+    datepickerTypeOptionList: ['single', 'range'],
   },
 })
 @Injectable()
@@ -55,6 +57,11 @@ export class FormConstructorState {
   @Selector()
   public static getInputTypeOptionList$(state: FormConstructorStateModel): InputType[] {
     return state.inputTypeOptionList;
+  }
+
+  @Selector()
+  public static getDatepickerTypeOptionList$(state: FormConstructorStateModel): DatepickerType[] {
+    return state.datepickerTypeOptionList;
   }
 
   @Action(FormConstructorActions.AddInputElementToEditor)
@@ -109,6 +116,11 @@ export class FormConstructorState {
 
   @Action(FormConstructorActions.PatchSelectElementSettings)
   public patchSelectElementSettings(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.PatchSelectElementSettings): void {
+    const optionList = action.settings.optionList
+      .trim()
+      .split(',')
+      .map((value) => value.trim());
+
     ctx.setState(
       patch({
         formFieldList: updateItem(
@@ -117,7 +129,24 @@ export class FormConstructorState {
             label: action.settings.label,
             placeholder: action.settings.placeholder,
             hint: action.settings.hint,
-            optionList: action.settings.optionList,
+            optionList,
+          }),
+        ),
+      }),
+    );
+  }
+
+  @Action(FormConstructorActions.PatchDatepickerElementSettings)
+  public patchDatepickerElementSettings(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.PatchDatepickerElementSettings): void {
+    ctx.setState(
+      patch({
+        formFieldList: updateItem(
+          action.index,
+          patch({
+            label: action.settings.label,
+            placeholder: action.settings.placeholder,
+            hint: action.settings.hint,
+            datepickerType: action.settings.datepickerType,
           }),
         ),
       }),
