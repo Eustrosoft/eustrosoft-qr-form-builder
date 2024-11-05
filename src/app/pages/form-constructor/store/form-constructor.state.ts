@@ -107,6 +107,23 @@ export class FormConstructorState {
     );
   }
 
+  @Action(FormConstructorActions.PatchSelectElementSettings)
+  public patchSelectElementSettings(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.PatchSelectElementSettings): void {
+    ctx.setState(
+      patch({
+        formFieldList: updateItem(
+          action.index,
+          patch({
+            label: action.settings.label,
+            placeholder: action.settings.placeholder,
+            hint: action.settings.hint,
+            optionList: action.settings.optionList,
+          }),
+        ),
+      }),
+    );
+  }
+
   @Action(FormConstructorActions.RemoveFormElement)
   public removeFormElement(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.RemoveFormElement): void {
     ctx.setState(

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
-import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { InputElement, InputSettingsForm, InputType } from '@app/pages/form-constructor/form-constructor.model';
@@ -12,6 +12,8 @@ import { select } from '@ngxs/store';
 import { FormConstructorState } from '@app/pages/form-constructor/store/form-constructor.state';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { FormElementActionsComponent } from '@app/pages/form-constructor/components/form-element-actions/form-element-actions.component';
+import { SETTINGS_OVERLAY_POSITION_RIGHT } from '@app/pages/form-constructor/form-constructor.constant';
 
 @Component({
   selector: 'input-element-settings',
@@ -32,6 +34,7 @@ import { map } from 'rxjs';
     MatOption,
     MatCardTitle,
     MatCardActions,
+    FormElementActionsComponent,
   ],
   templateUrl: './input-element-settings.component.html',
   styleUrl: './input-element-settings.component.scss',
@@ -45,14 +48,7 @@ export class InputElementSettingsComponent implements OnInit {
   public readonly hint = input<InputElement['hint']>('');
   public readonly inputType = input<InputElement['inputType']>('text');
 
-  protected readonly position = input<ConnectedPosition>({
-    originX: 'end',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetX: 8,
-  });
-  protected isOpen = false;
+  protected readonly SETTINGS_OVERLAY_POSITION_RIGHT = SETTINGS_OVERLAY_POSITION_RIGHT;
 
   protected readonly inputTypeOptionList = select(FormConstructorState.getInputTypeOptionList$);
 
@@ -69,6 +65,8 @@ export class InputElementSettingsComponent implements OnInit {
 
   public readonly removeClicked = output<void>();
 
+  protected isSettingsOpen = false;
+
   public ngOnInit(): void {
     this.applyInputsToForm();
   }
@@ -77,6 +75,7 @@ export class InputElementSettingsComponent implements OnInit {
     this.inputSettingsForm.patchValue({
       label: this.label(),
       placeholder: this.placeholder(),
+      hint: this.hint(),
       inputType: this.inputType(),
     });
   }

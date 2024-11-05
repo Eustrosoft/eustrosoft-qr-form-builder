@@ -33,5 +33,6 @@ export class ControlEditorComponent {
   protected readonly formFieldList = select(FormConstructorState.getFormFieldList$);
 
   protected readonly patchInputElementSettings = dispatch(FormConstructorActions.PatchInputElementSettings);
+  protected readonly patchSelectElementSettings = dispatch(FormConstructorActions.PatchSelectElementSettings);
   protected readonly removeFormElement = dispatch(FormConstructorActions.RemoveFormElement);
 }

@@ -1,4 +1,5 @@
 import { DatepickerElement, InputElement, SelectElement } from '@app/pages/form-constructor/form-constructor.model';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 
 export const INPUT_DEFAULT_PARAMS: InputElement = {
   label: 'Input',
@@ -23,3 +24,11 @@ export const DATEPICKER_DEFAULT_PARAMS: DatepickerElement = {
   controlElement: 'datepicker',
   datepickerType: 'single',
 } as const;
+
+export const SETTINGS_OVERLAY_POSITION_RIGHT: ConnectedPosition = {
+  originX: 'end',
+  originY: 'top',
+  overlayX: 'start',
+  overlayY: 'top',
+  offsetX: 8,
+};

@@ -13,8 +13,17 @@
     </flex-block>
   }
   @if (formElementService.isSelectElement(formField)) {
-    <select-element />
-    <select-element-settings />
+    <flex-block gapSize="8" flexDirection="column">
+      <select-element [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" [optionList]="formField.optionList" />
+      <select-element-settings
+        [label]="formField.label"
+        [placeholder]="formField.placeholder"
+        [hint]="formField.hint"
+        [optionList]="formField.optionList"
+        (settingsChanged)="patchSelectElementSettings($event, index)"
+        (removeClicked)="removeFormElement(index)"
+      />
+    </flex-block>
   }
   @if (formElementService.isDatepickerElement(formField)) {
     <datepicker-element />

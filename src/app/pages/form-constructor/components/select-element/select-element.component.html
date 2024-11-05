@@ -1,4 +1,13 @@
 <mat-form-field>
   <mat-label>{{ label() }}</mat-label>
-  <mat-select></mat-select>
+  <mat-select>
+    @for (option of optionList(); track option) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+    } @empty {
+      <mat-option disabled>No options available</mat-option>
+    }
+  </mat-select>
+  @if (hint()?.length) {
+    <mat-hint>{{ hint() }}</mat-hint>
+  }
 </mat-form-field>

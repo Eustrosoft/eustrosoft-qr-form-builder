@@ -31,3 +31,10 @@ export type InputSettingsForm = FormGroup<{
   hint: FormControl<string>;
   inputType: FormControl<InputType>;
 }>;
+
+export type SelectSettingsForm = FormGroup<{
+  label: FormControl<string>;
+  placeholder: FormControl<string>;
+  hint: FormControl<string>;
+  optionList: FormControl<string[]>;
+}>;
