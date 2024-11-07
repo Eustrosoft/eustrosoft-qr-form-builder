@@ -13,14 +13,17 @@ export interface FormElement {
 
 export interface InputElement extends FormElement {
   inputType: InputType;
+  value: string | null;
 }
 
 export interface SelectElement extends FormElement {
   optionList: string[];
+  value: string | null;
 }
 
 export interface DatepickerElement extends FormElement {
   datepickerType: DatepickerType;
+  value: string | null;
 }
 
 export type FormField = InputElement | SelectElement | DatepickerElement;

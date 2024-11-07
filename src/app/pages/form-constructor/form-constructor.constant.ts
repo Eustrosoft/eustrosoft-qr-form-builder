@@ -7,6 +7,7 @@ export const INPUT_DEFAULT_PARAMS: InputElement = {
   placeholder: '',
   hint: '',
   inputType: 'text',
+  value: null,
 } as const;
 
 export const SELECT_DEFAULT_PARAMS: SelectElement = {
@@ -15,6 +16,7 @@ export const SELECT_DEFAULT_PARAMS: SelectElement = {
   placeholder: '',
   hint: '',
   optionList: [],
+  value: null,
 } as const;
 
 export const DATEPICKER_DEFAULT_PARAMS: DatepickerElement = {
@@ -23,6 +25,7 @@ export const DATEPICKER_DEFAULT_PARAMS: DatepickerElement = {
   placeholder: '',
   hint: '',
   datepickerType: 'single',
+  value: null,
 } as const;
 
 export const SETTINGS_OVERLAY_POSITION_RIGHT: ConnectedPosition = {
