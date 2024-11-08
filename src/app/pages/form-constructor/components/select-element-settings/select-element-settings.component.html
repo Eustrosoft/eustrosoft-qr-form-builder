@@ -4,6 +4,7 @@
   [cdkConnectedOverlayOrigin]="trigger"
   [cdkConnectedOverlayOpen]="isSettingsOpen"
   [cdkConnectedOverlayPositions]="[SETTINGS_OVERLAY_POSITION_RIGHT]"
+  (overlayOutsideClick)="isSettingsOpen = !isSettingsOpen"
 >
   <mat-card>
     <mat-card-header>

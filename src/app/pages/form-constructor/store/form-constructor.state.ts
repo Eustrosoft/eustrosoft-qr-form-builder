@@ -47,8 +47,7 @@ export class FormConstructorState {
    *  Добавить режим предпросмотра формы
    *  Добавить header как в qr-tiger
    *  Продумать сериализацию формы
-   *  Закрывать settings overlay при клике вне overlay
-   *  Сделать custom controls из input-element, select-element, datepicker-element
+   *  Сделать custom control из input-element, select-element, datepicker-element
    */
 
   private readonly formElementFactoryService = inject(FormElementFactoryService);

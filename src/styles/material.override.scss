@@ -1,3 +1,15 @@
+@use '@angular/material' as mat;
+@use 'styles/mixins' as mixins;
+@use 'sass:map';
+
 mat-form-field {
   width: 100%;
+
+  &.invalid {
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__leading,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__notch,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__trailing {
+      border-color: map.get(map.get(mat.$azure-palette, error), 40);
+    }
+  }
 }
