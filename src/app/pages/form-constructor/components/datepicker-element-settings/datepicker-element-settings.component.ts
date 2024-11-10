@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
-import { DatepickerElement, DatepickerSettingsForm, DatepickerType } from '@app/pages/form-constructor/form-constructor.model';
+import { DatepickerElement, DatepickerSettingsForm } from '@app/pages/form-constructor/form-constructor.model';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { FormElementActionsComponent } from '@app/pages/form-constructor/components/form-element-actions/form-element-actions.component';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
@@ -13,8 +13,6 @@ import { map } from 'rxjs';
 import { SETTINGS_OVERLAY_POSITION_RIGHT } from '@app/pages/form-constructor/form-constructor.constant';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { select } from '@ngxs/store';
-import { FormConstructorState } from '@app/pages/form-constructor/store/form-constructor.state';
 
 @Component({
   selector: 'datepicker-element-settings',
@@ -49,17 +47,13 @@ export class DatepickerElementSettingsComponent implements OnInit {
   public readonly label = input<DatepickerElement['label']>('');
   public readonly placeholder = input<DatepickerElement['placeholder']>('');
   public readonly hint = input<DatepickerElement['hint']>('');
-  public readonly datepickerType = input<DatepickerElement['datepickerType']>('single');
 
   protected readonly SETTINGS_OVERLAY_POSITION_RIGHT = SETTINGS_OVERLAY_POSITION_RIGHT;
-
-  protected readonly datepickerTypeOptionList = select(FormConstructorState.getDatepickerTypeOptionList$);
 
   protected readonly datepickerSettingsForm: DatepickerSettingsForm = this.fb.group({
     label: this.fb.nonNullable.control<string>(this.label()),
     placeholder: this.fb.nonNullable.control<string>(this.placeholder()),
     hint: this.fb.nonNullable.control<string>(this.hint()),
-    datepickerType: this.fb.nonNullable.control<DatepickerType>(this.datepickerType()),
   });
 
   public readonly settingsChanged = outputFromObservable<ReturnType<DatepickerSettingsForm['getRawValue']>>(
@@ -79,7 +73,6 @@ export class DatepickerElementSettingsComponent implements OnInit {
       label: this.label(),
       placeholder: this.placeholder(),
       hint: this.hint(),
-      datepickerType: this.datepickerType(),
     });
   }
 }

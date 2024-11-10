@@ -1,5 +1,5 @@
 import {
-  DatepickerElement,
+  ControlElement,
   DatepickerSettingsForm,
   InputElement,
   InputSettingsForm,
@@ -20,7 +20,6 @@ export namespace FormConstructorActions {
 
   export class AddDatepickerElementToEditor {
     public static readonly type: string = '[FormConstructorActions] Add Datepicker Element To Editor';
-    constructor(readonly datepickerType: DatepickerElement['datepickerType'] = 'single') {}
   }
 
   export class PatchInputElementSettings {
@@ -49,6 +48,9 @@ export namespace FormConstructorActions {
 
   export class RemoveFormElement {
     public static readonly type: string = '[FormConstructorActions] Remove Form Element';
-    constructor(readonly index: number) {}
+    constructor(
+      readonly controlElement: ControlElement,
+      readonly index: number,
+    ) {}
   }
 }

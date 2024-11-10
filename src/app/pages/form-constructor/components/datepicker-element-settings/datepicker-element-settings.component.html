@@ -26,14 +26,6 @@
           <mat-label>Hint</mat-label>
           <input [formControl]="datepickerSettingsForm.controls.hint" placeholder="Hint for element" matInput />
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>Datepicker Type</mat-label>
-          <mat-select [formControl]="datepickerSettingsForm.controls.datepickerType">
-            @for (datepickerType of datepickerTypeOptionList(); track datepickerType) {
-              <mat-option [value]="datepickerType">{{ datepickerType }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>

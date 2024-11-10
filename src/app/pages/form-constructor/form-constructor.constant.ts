@@ -1,5 +1,6 @@
 import { DatepickerElement, InputElement, SelectElement } from '@app/pages/form-constructor/form-constructor.model';
 import { ConnectedPosition } from '@angular/cdk/overlay';
+import { FormControl } from '@angular/forms';
 
 export const INPUT_DEFAULT_PARAMS: InputElement = {
   controlElement: 'input',
@@ -7,7 +8,7 @@ export const INPUT_DEFAULT_PARAMS: InputElement = {
   placeholder: '',
   hint: '',
   inputType: 'text',
-  value: null,
+  formControl: new FormControl(),
 } as const;
 
 export const SELECT_DEFAULT_PARAMS: SelectElement = {
@@ -16,7 +17,7 @@ export const SELECT_DEFAULT_PARAMS: SelectElement = {
   placeholder: '',
   hint: '',
   optionList: [],
-  value: null,
+  formControl: new FormControl(),
 } as const;
 
 export const DATEPICKER_DEFAULT_PARAMS: DatepickerElement = {
@@ -24,8 +25,7 @@ export const DATEPICKER_DEFAULT_PARAMS: DatepickerElement = {
   label: 'Datepicker',
   placeholder: '',
   hint: '',
-  datepickerType: 'single',
-  value: null,
+  formControl: new FormControl(),
 } as const;
 
 export const SETTINGS_OVERLAY_POSITION_RIGHT: ConnectedPosition = {

@@ -1,39 +1,50 @@
 @for (formField of formFieldList(); track index; let index = $index) {
   @if (formElementService.isInputElement(formField)) {
     <flex-block gapSize="8" flexDirection="column">
-      <input-element [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" [inputType]="formField.inputType" />
+      <input-element
+        [formControl]="formField.formControl"
+        [label]="formField.label"
+        [placeholder]="formField.placeholder"
+        [hint]="formField.hint"
+        [inputType]="formField.inputType"
+      />
       <input-element-settings
         [label]="formField.label"
         [placeholder]="formField.placeholder"
         [hint]="formField.hint"
         [inputType]="formField.inputType"
         (settingsChanged)="patchInputElementSettings($event, index)"
-        (removeClicked)="removeFormElement(index)"
+        (removeClicked)="removeFormElement(formField.controlElement, index)"
       />
     </flex-block>
   }
   @if (formElementService.isSelectElement(formField)) {
     <flex-block gapSize="8" flexDirection="column">
-      <select-element [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" [optionList]="formField.optionList" />
+      <select-element
+        [formControl]="formField.formControl"
+        [label]="formField.label"
+        [placeholder]="formField.placeholder"
+        [hint]="formField.hint"
+        [optionList]="formField.optionList"
+      />
       <select-element-settings
         [label]="formField.label"
         [placeholder]="formField.placeholder"
         [hint]="formField.hint"
         [optionList]="formField.optionList"
         (settingsChanged)="patchSelectElementSettings($event, index)"
-        (removeClicked)="removeFormElement(index)"
+        (removeClicked)="removeFormElement(formField.controlElement, index)"
       />
     </flex-block>
   }
   @if (formElementService.isDatepickerElement(formField)) {
-    <datepicker-element [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" [datepickerType]="formField.datepickerType" />
+    <datepicker-element [formControl]="formField.formControl" [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" />
     <datepicker-element-settings
       [label]="formField.label"
       [placeholder]="formField.placeholder"
       [hint]="formField.hint"
-      [datepickerType]="formField.datepickerType"
       (settingsChanged)="patchDatepickerElementSettings($event, index)"
-      (removeClicked)="removeFormElement(index)"
+      (removeClicked)="removeFormElement(formField.controlElement, index)"
     />
   }
 }

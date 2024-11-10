@@ -1,8 +1,8 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-export type ControlElement = 'input' | 'select' | 'datepicker';
+export type ControlElement = 'input' | 'select' | 'datepicker' | 'ranged-datepicker';
 export type InputType = 'text' | 'number' | 'password';
-export type DatepickerType = 'range' | 'single';
+export type RangedDatepickerValue = { start: string; end: string };
 
 export interface FormElement {
   controlElement: ControlElement;
@@ -13,18 +13,23 @@ export interface FormElement {
 
 export interface InputElement extends FormElement {
   inputType: InputType;
-  value: string | null;
+  formControl: FormControl<string>;
 }
 
 export interface SelectElement extends FormElement {
   optionList: string[];
-  value: string | null;
+  formControl: FormControl<string>;
 }
 
 export interface DatepickerElement extends FormElement {
-  datepickerType: DatepickerType;
-  value: string | null;
+  formControl: FormControl<string>;
 }
+
+export interface RangedDatepickerElement extends FormElement {
+  formControl: FormControl<RangedDatepickerValue>;
+}
+
+export type FormFieldList = FormArray<FormControl<FormField>>;
 
 export type FormField = InputElement | SelectElement | DatepickerElement;
 
@@ -46,5 +51,10 @@ export type DatepickerSettingsForm = FormGroup<{
   label: FormControl<string>;
   placeholder: FormControl<string>;
   hint: FormControl<string>;
-  datepickerType: FormControl<DatepickerType>;
+}>;
+
+export type RangedDatepickerSettingsForm = FormGroup<{
+  label: FormControl<string>;
+  placeholder: FormControl<string>;
+  hint: FormControl<string>;
 }>;

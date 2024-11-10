@@ -1,6 +1,10 @@
-<mat-form-field>
+<mat-form-field
+  [class.invalid]="
+    (formControlDirective?.control?.invalid ?? false) && ((formControlDirective?.control?.touched ?? false) || (formControlDirective?.control?.dirty ?? false))
+  "
+>
   <mat-label>{{ label() }}</mat-label>
-  <mat-select [placeholder]="placeholder()">
+  <mat-select [value]="value()" [placeholder]="placeholder()" [disabled]="isDisabled()" (selectionChange)="selectionChanged($event)" (blur)="markAsTouched()">
     @for (option of optionList(); track option) {
       <mat-option [value]="option">{{ option }}</mat-option>
     } @empty {

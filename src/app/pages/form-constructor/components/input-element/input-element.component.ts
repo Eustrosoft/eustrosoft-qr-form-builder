@@ -40,7 +40,7 @@ export class InputElementComponent implements ControlValueAccessor, Validator, O
   public readonly placeholder = input<InputElement['placeholder']>('');
   public readonly hint = input<InputElement['hint']>('');
   public readonly inputType = input<InputElement['inputType']>('text');
-  public readonly value = model<InputElement['value']>(null);
+  public readonly value = model<InputElement['formControl']['value']>('');
   public readonly isTouched = model<boolean>(false);
   public readonly isDisabled = model<boolean>(false);
 
@@ -61,7 +61,7 @@ export class InputElementComponent implements ControlValueAccessor, Validator, O
     }
   }
 
-  public writeValue(value: string | null): void {
+  public writeValue(value: string): void {
     this.value.set(value);
   }
 
@@ -80,7 +80,7 @@ export class InputElementComponent implements ControlValueAccessor, Validator, O
     this.onValidatorChange = fn;
   }
 
-  public registerOnChange(fn: (value: string | null) => void): void {
+  public registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
@@ -89,7 +89,7 @@ export class InputElementComponent implements ControlValueAccessor, Validator, O
   }
 
   /* eslint-disable @typescript-eslint/no-empty-function */
-  public onChange: (value: string | null) => void = () => {};
+  public onChange: (value: string) => void = () => {};
   public onTouched: () => void = () => {};
   public onValidatorChange: () => void = () => {};
   /* eslint-enable @typescript-eslint/no-empty-function */

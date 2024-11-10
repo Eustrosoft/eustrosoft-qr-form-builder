@@ -4,7 +4,15 @@
   "
 >
   <mat-label>{{ label() }}</mat-label>
-  <input [type]="inputType()" [placeholder]="placeholder()" [disabled]="isDisabled()" (blur)="markAsTouched()" matInput />
+  <input
+    [ngModel]="value()"
+    [type]="inputType()"
+    [placeholder]="placeholder()"
+    [disabled]="isDisabled()"
+    (blur)="markAsTouched()"
+    (ngModelChange)="onChange($event)"
+    matInput
+  />
   @if (hint().length) {
     <mat-hint>{{ hint() }}</mat-hint>
   }

@@ -1,27 +1,13 @@
-@switch (datepickerType()) {
-  @case ('single') {
-    <mat-form-field>
-      <mat-label>{{ label() }}</mat-label>
-      <input [placeholder]="placeholder()" [matDatepicker]="picker" matInput />
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      @if (hint().length) {
-        <mat-hint>{{ hint() }}</mat-hint>
-      }
-    </mat-form-field>
+<mat-form-field
+  [class.invalid]="
+    (formControlDirective?.control?.invalid ?? false) && ((formControlDirective?.control?.touched ?? false) || (formControlDirective?.control?.dirty ?? false))
+  "
+>
+  <mat-label>{{ label() }}</mat-label>
+  <input [value]="value()" [placeholder]="placeholder()" [matDatepicker]="picker" (blur)="markAsTouched()" (dateChange)="dateChange($event.value)" matInput />
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  @if (hint().length) {
+    <mat-hint>{{ hint() }}</mat-hint>
   }
-  @case ('range') {
-    <mat-form-field>
-      <mat-label>{{ label() }}</mat-label>
-      <mat-date-range-input [rangePicker]="rangePicker">
-        <input matStartDate [placeholder]="placeholder()" />
-        <input matEndDate [placeholder]="placeholder()" />
-      </mat-date-range-input>
-      <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
-      <mat-date-range-picker #rangePicker></mat-date-range-picker>
-      @if (hint().length) {
-        <mat-hint>{{ hint() }}</mat-hint>
-      }
-    </mat-form-field>
-  }
-}
+</mat-form-field>
