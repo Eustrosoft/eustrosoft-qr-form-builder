@@ -1,10 +1,12 @@
-<form-element-actions (removeClicked)="removeClicked.emit()" (configureClicked)="isSettingsOpen = !isSettingsOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" />
+<form-element-actions (removeClicked)="removeClicked.emit()" (configureClicked)="openSettings()" cdkOverlayOrigin #trigger="cdkOverlayOrigin" />
 <ng-template
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="trigger"
   [cdkConnectedOverlayOpen]="isSettingsOpen"
-  [cdkConnectedOverlayPositions]="[SETTINGS_OVERLAY_POSITION_RIGHT]"
-  (overlayOutsideClick)="isSettingsOpen = !isSettingsOpen"
+  [cdkConnectedOverlayPositions]="CDK_CONNECTED_OVERLAY_POSITIONS"
+  [cdkConnectedOverlayScrollStrategy]="cdkConnectedOverlayScrollStrategy"
+  (overlayOutsideClick)="closeSettings()"
+  (detach)="closeSettings()"
 >
   <mat-card>
     <mat-card-header>
@@ -28,7 +30,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Input Type</mat-label>
-          <mat-select [formControl]="inputSettingsForm.controls.inputType">
+          <mat-select [formControl]="inputSettingsForm.controls.inputType" #inputTypeSelect>
             @for (inputType of inputTypeOptionList(); track inputType) {
               <mat-option [value]="inputType">{{ inputType }}</mat-option>
             }

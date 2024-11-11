@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit, output, viewChild } from '@angular/core';
+import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { InputElement, InputSettingsForm, InputType } from '@app/pages/form-constructor/form-constructor.model';
@@ -13,7 +13,7 @@ import { FormConstructorState } from '@app/pages/form-constructor/store/form-con
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { FormElementActionsComponent } from '@app/pages/form-constructor/components/form-element-actions/form-element-actions.component';
-import { SETTINGS_OVERLAY_POSITION_RIGHT } from '@app/pages/form-constructor/form-constructor.constant';
+import { CDK_CONNECTED_OVERLAY_POSITIONS } from '@app/pages/form-constructor/form-constructor.constant';
 
 @Component({
   selector: 'input-element-settings',
@@ -42,13 +42,16 @@ import { SETTINGS_OVERLAY_POSITION_RIGHT } from '@app/pages/form-constructor/for
 })
 export class InputElementSettingsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly overlay = inject(Overlay);
 
   public readonly label = input<InputElement['label']>('');
   public readonly placeholder = input<InputElement['placeholder']>('');
   public readonly hint = input<InputElement['hint']>('');
   public readonly inputType = input<InputElement['inputType']>('text');
 
-  protected readonly SETTINGS_OVERLAY_POSITION_RIGHT = SETTINGS_OVERLAY_POSITION_RIGHT;
+  protected cdkConnectedOverlayScrollStrategy = this.overlay.scrollStrategies.close();
+  protected CDK_CONNECTED_OVERLAY_POSITIONS = CDK_CONNECTED_OVERLAY_POSITIONS;
+  protected readonly inputTypeSelect = viewChild<MatSelect>('inputTypeSelect');
 
   protected readonly inputTypeOptionList = select(FormConstructorState.getInputTypeOptionList$);
 
@@ -69,6 +72,17 @@ export class InputElementSettingsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.applyInputsToForm();
+  }
+
+  protected openSettings(): void {
+    this.isSettingsOpen = true;
+  }
+
+  protected closeSettings(): void {
+    if (this.inputTypeSelect()?.panelOpen ?? false) {
+      return;
+    }
+    this.isSettingsOpen = false;
   }
 
   private applyInputsToForm(): void {

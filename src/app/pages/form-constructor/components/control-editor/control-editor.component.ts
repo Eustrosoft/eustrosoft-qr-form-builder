@@ -14,6 +14,7 @@ import { DatepickerElementSettingsComponent } from '@app/pages/form-constructor/
 import { tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'control-editor',
@@ -32,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './control-editor.component.html',
   styleUrl: './control-editor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [CdkScrollable],
 })
 export class ControlEditorComponent implements OnInit {
   protected readonly formElementService = inject(FormElementService);

@@ -35,3 +35,13 @@ export const SETTINGS_OVERLAY_POSITION_RIGHT: ConnectedPosition = {
   overlayY: 'top',
   offsetX: 8,
 };
+
+export const SETTINGS_OVERLAY_POSITION_RIGHT_FROM_BOTTOM: ConnectedPosition = {
+  originX: 'end',
+  originY: 'bottom',
+  overlayX: 'start',
+  overlayY: 'bottom',
+  offsetX: 8,
+};
+
+export const CDK_CONNECTED_OVERLAY_POSITIONS = [SETTINGS_OVERLAY_POSITION_RIGHT, SETTINGS_OVERLAY_POSITION_RIGHT_FROM_BOTTOM];
