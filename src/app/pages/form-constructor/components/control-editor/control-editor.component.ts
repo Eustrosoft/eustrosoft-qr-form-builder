@@ -13,8 +13,12 @@ import { SelectElementSettingsComponent } from '@app/pages/form-constructor/comp
 import { DatepickerElementSettingsComponent } from '@app/pages/form-constructor/components/datepicker-element-settings/datepicker-element-settings.component';
 import { tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkScrollable } from '@angular/cdk/scrolling';
+import { UiDividerComponent } from '@core/components/ui-divider/ui-divider.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'control-editor',
@@ -29,6 +33,12 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
     SelectElementSettingsComponent,
     DatepickerElementSettingsComponent,
     ReactiveFormsModule,
+    UiDividerComponent,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    CdkTextareaAutosize,
+    FormsModule,
   ],
   templateUrl: './control-editor.component.html',
   styleUrl: './control-editor.component.scss',
@@ -40,8 +50,12 @@ export class ControlEditorComponent implements OnInit {
   protected readonly cdRef = inject(ChangeDetectorRef);
   protected readonly destroyRef = inject(DestroyRef);
 
+  protected readonly formTitle = select(FormConstructorState.getFormTitle$);
+  protected readonly formDescription = select(FormConstructorState.getFormDescription$);
   protected readonly formFieldList = select(FormConstructorState.getFormFieldList$);
 
+  protected readonly setFormTitle = dispatch(FormConstructorActions.SetFormTitle);
+  protected readonly setFormDescription = dispatch(FormConstructorActions.SetFormDescription);
   protected readonly patchInputElementSettings = dispatch(FormConstructorActions.PatchInputElementSettings);
   protected readonly patchSelectElementSettings = dispatch(FormConstructorActions.PatchSelectElementSettings);
   protected readonly patchDatepickerElementSettings = dispatch(FormConstructorActions.PatchDatepickerElementSettings);

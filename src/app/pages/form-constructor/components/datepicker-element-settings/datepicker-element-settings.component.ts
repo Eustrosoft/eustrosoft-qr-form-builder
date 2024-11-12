@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
 import { DatepickerElement, DatepickerSettingsForm } from '@app/pages/form-constructor/form-constructor.model';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { FormElementActionsComponent } from '@app/pages/form-constructor/components/form-element-actions/form-element-actions.component';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { FlexBlockComponent } from '@core/components/flex-block/flex-block.component';
@@ -10,7 +10,7 @@ import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { SETTINGS_OVERLAY_POSITION_RIGHT } from '@app/pages/form-constructor/form-constructor.constant';
+import { CDK_CONNECTED_OVERLAY_POSITIONS } from '@app/pages/form-constructor/form-constructor.constant';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 
@@ -43,12 +43,14 @@ import { MatSelect } from '@angular/material/select';
 })
 export class DatepickerElementSettingsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly overlay = inject(Overlay);
 
   public readonly label = input<DatepickerElement['label']>('');
   public readonly placeholder = input<DatepickerElement['placeholder']>('');
   public readonly hint = input<DatepickerElement['hint']>('');
 
-  protected readonly SETTINGS_OVERLAY_POSITION_RIGHT = SETTINGS_OVERLAY_POSITION_RIGHT;
+  protected cdkConnectedOverlayScrollStrategy = this.overlay.scrollStrategies.close();
+  protected CDK_CONNECTED_OVERLAY_POSITIONS = CDK_CONNECTED_OVERLAY_POSITIONS;
 
   protected readonly datepickerSettingsForm: DatepickerSettingsForm = this.fb.group({
     label: this.fb.nonNullable.control<string>(this.label()),
@@ -66,6 +68,14 @@ export class DatepickerElementSettingsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.applyInputsToForm();
+  }
+
+  protected openSettings(): void {
+    this.isSettingsOpen = true;
+  }
+
+  protected closeSettings(): void {
+    this.isSettingsOpen = false;
   }
 
   private applyInputsToForm(): void {

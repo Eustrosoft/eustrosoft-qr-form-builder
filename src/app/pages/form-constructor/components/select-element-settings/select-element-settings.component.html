@@ -1,10 +1,12 @@
-<form-element-actions (removeClicked)="removeClicked.emit()" (configureClicked)="isSettingsOpen = !isSettingsOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" />
+<form-element-actions (removeClicked)="removeClicked.emit()" (configureClicked)="openSettings()" cdkOverlayOrigin #trigger="cdkOverlayOrigin" />
 <ng-template
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="trigger"
   [cdkConnectedOverlayOpen]="isSettingsOpen"
-  [cdkConnectedOverlayPositions]="[SETTINGS_OVERLAY_POSITION_RIGHT]"
-  (overlayOutsideClick)="isSettingsOpen = !isSettingsOpen"
+  [cdkConnectedOverlayPositions]="CDK_CONNECTED_OVERLAY_POSITIONS"
+  [cdkConnectedOverlayScrollStrategy]="cdkConnectedOverlayScrollStrategy"
+  (overlayOutsideClick)="closeSettings()"
+  (detach)="closeSettings()"
 >
   <mat-card>
     <mat-card-header>
@@ -34,7 +36,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button (click)="isSettingsOpen = !isSettingsOpen" mat-button>Close</button>
+      <button (click)="closeSettings()" mat-button>Close</button>
     </mat-card-actions>
   </mat-card>
 </ng-template>

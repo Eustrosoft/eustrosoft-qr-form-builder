@@ -1,3 +1,20 @@
+<mat-form-field>
+  <mat-label>Form Title</mat-label>
+  <input matInput type="text" placeholder="Title for form" [ngModel]="formTitle()" (ngModelChange)="setFormTitle($event)" />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Form Description</mat-label>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="2"
+    cdkAutosizeMaxRows="4"
+    placeholder="Brief description for form"
+    [ngModel]="formDescription()"
+    (ngModelChange)="setFormDescription($event)"
+  ></textarea>
+</mat-form-field>
+<ui-divider />
 @for (formField of formFieldList(); track index; let index = $index) {
   @if (formElementService.isInputElement(formField)) {
     <flex-block gapSize="8" flexDirection="column">

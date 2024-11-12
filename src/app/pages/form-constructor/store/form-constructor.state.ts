@@ -8,6 +8,8 @@ import { FormElementService } from '@app/pages/form-constructor/services/form-el
 
 export interface FormConstructorStateModel {
   formElementList: FormElement[];
+  formTitle: string;
+  formDescription: string;
   formFieldList: FormField[];
   inputTypeOptionList: InputType[];
 }
@@ -34,13 +36,9 @@ export interface FormConstructorStateModel {
         placeholder: '',
         hint: '',
       },
-      {
-        controlElement: 'ranged-datepicker',
-        label: 'Ranged Datepicker',
-        placeholder: '',
-        hint: '',
-      },
     ],
+    formTitle: '',
+    formDescription: '',
     formFieldList: [],
     inputTypeOptionList: ['text', 'number', 'password'],
   },
@@ -64,6 +62,16 @@ export class FormConstructorState {
   }
 
   @Selector()
+  public static getFormTitle$(state: FormConstructorStateModel): string {
+    return state.formTitle;
+  }
+
+  @Selector()
+  public static getFormDescription$(state: FormConstructorStateModel): string {
+    return state.formDescription;
+  }
+
+  @Selector()
   public static getFormFieldList$(state: FormConstructorStateModel): FormField[] {
     return state.formFieldList;
   }
@@ -71,6 +79,24 @@ export class FormConstructorState {
   @Selector()
   public static getInputTypeOptionList$(state: FormConstructorStateModel): InputType[] {
     return state.inputTypeOptionList;
+  }
+
+  @Action(FormConstructorActions.SetFormTitle)
+  public setFormTitle(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.SetFormTitle): void {
+    ctx.setState(
+      patch({
+        formTitle: action.title,
+      }),
+    );
+  }
+
+  @Action(FormConstructorActions.SetFormDescription)
+  public setFormDescription(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.SetFormDescription): void {
+    ctx.setState(
+      patch({
+        formDescription: action.description,
+      }),
+    );
   }
 
   @Action(FormConstructorActions.AddInputElementToEditor)

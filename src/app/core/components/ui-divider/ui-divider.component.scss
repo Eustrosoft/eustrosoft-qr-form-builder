@@ -1,0 +1,9 @@
+@use 'styles/mixins' as mixins;
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+:host {
+  height: mixins.rem(1);
+  display: block;
+  background: map.get(mat.$azure-palette, 20);
+}

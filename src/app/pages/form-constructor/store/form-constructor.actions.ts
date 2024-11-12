@@ -8,6 +8,16 @@ import {
 } from '@app/pages/form-constructor/form-constructor.model';
 
 export namespace FormConstructorActions {
+  export class SetFormTitle {
+    public static readonly type: string = '[FormConstructorActions] Set Form Title';
+    constructor(readonly title: string) {}
+  }
+
+  export class SetFormDescription {
+    public static readonly type: string = '[FormConstructorActions] Set Form Description';
+    constructor(readonly description: string) {}
+  }
+
   export class AddInputElementToEditor {
     public static readonly type: string = '[FormConstructorActions] Add Input Element To Editor';
     constructor(readonly inputType: InputElement['inputType'] = 'text') {}

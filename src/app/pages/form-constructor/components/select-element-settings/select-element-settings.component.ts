@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin, Overlay } from '@angular/cdk/overlay';
 import { FormElementActionsComponent } from '@app/pages/form-constructor/components/form-element-actions/form-element-actions.component';
 import { FlexBlockComponent } from '@core/components/flex-block/flex-block.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { SETTINGS_OVERLAY_POSITION_RIGHT } from '@app/pages/form-constructor/form-constructor.constant';
+import { CDK_CONNECTED_OVERLAY_POSITIONS } from '@app/pages/form-constructor/form-constructor.constant';
 import { SelectElement, SelectSettingsForm } from '@app/pages/form-constructor/form-constructor.model';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
@@ -39,13 +39,15 @@ import { MatInput } from '@angular/material/input';
 })
 export class SelectElementSettingsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly overlay = inject(Overlay);
 
   public readonly label = input<SelectElement['label']>('');
   public readonly placeholder = input<SelectElement['placeholder']>('');
   public readonly hint = input<SelectElement['hint']>('');
   public readonly optionList = input<string, SelectElement['optionList']>('', { transform: (value) => value.join(',') });
 
-  protected readonly SETTINGS_OVERLAY_POSITION_RIGHT = SETTINGS_OVERLAY_POSITION_RIGHT;
+  protected cdkConnectedOverlayScrollStrategy = this.overlay.scrollStrategies.close();
+  protected CDK_CONNECTED_OVERLAY_POSITIONS = CDK_CONNECTED_OVERLAY_POSITIONS;
 
   protected readonly selectSettingsForm: SelectSettingsForm = this.fb.group({
     label: this.fb.nonNullable.control<string>(this.label()),
@@ -64,6 +66,14 @@ export class SelectElementSettingsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.applyInputsToForm();
+  }
+
+  protected openSettings(): void {
+    this.isSettingsOpen = true;
+  }
+
+  protected closeSettings(): void {
+    this.isSettingsOpen = false;
   }
 
   private applyInputsToForm(): void {
