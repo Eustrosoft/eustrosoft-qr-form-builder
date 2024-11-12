@@ -1,0 +1,36 @@
+<flex-block>
+  <button [routerLink]="['../', AppRoutes.CONSTRUCTOR]" mat-flat-button>To Constructor</button>
+</flex-block>
+<flex-block flex="0 1 100%" flexDirection="column" flexAlignSelf="center">
+  <h4 class="form-header-text">{{ formTitle() }}</h4>
+  <div class="form-header-text">{{ formDescription() }}</div>
+  <flex-block flexDirection="column" class="form-display">
+    @for (formField of formFieldList(); track index; let index = $index) {
+      @if (formElementService.isInputElement(formField)) {
+        <input-element
+          [formControl]="formField.formControl"
+          [label]="formField.label"
+          [placeholder]="formField.placeholder"
+          [hint]="formField.hint"
+          [inputType]="formField.inputType"
+        />
+      }
+      @if (formElementService.isSelectElement(formField)) {
+        <select-element
+          [formControl]="formField.formControl"
+          [label]="formField.label"
+          [placeholder]="formField.placeholder"
+          [hint]="formField.hint"
+          [optionList]="formField.optionList"
+        />
+      }
+      @if (formElementService.isDatepickerElement(formField)) {
+        <datepicker-element [formControl]="formField.formControl" [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" />
+      }
+    }
+  </flex-block>
+  <flex-block flex="0" flexJustifyContent="space-between" flexAlignSelf="auto">
+    <button (click)="submitForm()" mat-flat-button>Submit</button>
+    <button (click)="clearForm()" mat-flat-button>Clear Form</button>
+  </flex-block>
+</flex-block>

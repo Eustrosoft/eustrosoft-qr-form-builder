@@ -1,6 +1,7 @@
 export type FlexDirection = 'column' | 'row' | 'column-reverse' | 'row-reverse' | '';
 export type FlexDisplay = 'flex' | 'inline-flex';
-export type FlexAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'self-end' | 'self-start' | 'stretch' | '';
+export type FlexAlignItems = 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'self-end' | 'self-start' | 'stretch' | 'auto' | '';
+
 export type FlexJustifyContent = 'center' | 'flex-end' | 'flex-start' | 'space-around' | 'space-between' | 'space-evenly' | '';
 export type GridDisplay = 'grid' | 'inline-grid';
 export type CursorType =

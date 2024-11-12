@@ -7,7 +7,6 @@
   <textarea
     matInput
     cdkTextareaAutosize
-    cdkAutosizeMinRows="2"
     cdkAutosizeMaxRows="4"
     placeholder="Brief description for form"
     [ngModel]="formDescription()"
@@ -55,13 +54,15 @@
     </flex-block>
   }
   @if (formElementService.isDatepickerElement(formField)) {
-    <datepicker-element [formControl]="formField.formControl" [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" />
-    <datepicker-element-settings
-      [label]="formField.label"
-      [placeholder]="formField.placeholder"
-      [hint]="formField.hint"
-      (settingsChanged)="patchDatepickerElementSettings($event, index)"
-      (removeClicked)="removeFormElement(formField.controlElement, index)"
-    />
+    <flex-block gapSize="8" flexDirection="column">
+      <datepicker-element [formControl]="formField.formControl" [label]="formField.label" [placeholder]="formField.placeholder" [hint]="formField.hint" />
+      <datepicker-element-settings
+        [label]="formField.label"
+        [placeholder]="formField.placeholder"
+        [hint]="formField.hint"
+        (settingsChanged)="patchDatepickerElementSettings($event, index)"
+        (removeClicked)="removeFormElement(formField.controlElement, index)"
+      />
+    </flex-block>
   }
 }

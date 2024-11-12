@@ -10,7 +10,7 @@
     [placeholder]="placeholder()"
     [disabled]="isDisabled()"
     (blur)="markAsTouched()"
-    (ngModelChange)="onChange($event)"
+    (ngModelChange)="inputChanged($event)"
     matInput
   />
   @if (hint().length) {

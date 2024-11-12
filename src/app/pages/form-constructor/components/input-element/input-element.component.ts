@@ -54,6 +54,12 @@ export class InputElementComponent implements ControlValueAccessor, Validator, O
     this.formControlDirective = this.injector.get<FormControlDirective | null>(FormControlDirective, null);
   }
 
+  protected inputChanged(event: string): void {
+    this.markAsTouched();
+    this.onChange(event);
+    this.writeValue(event);
+  }
+
   protected markAsTouched(): void {
     if (!this.isTouched()) {
       this.onTouched();

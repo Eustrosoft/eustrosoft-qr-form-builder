@@ -27,11 +27,11 @@ export class FormElementService {
   }
 
   public makeSelectElementControl(initialValue: string = ''): FormControl<string> {
-    return this.fb.nonNullable.control(initialValue);
+    return this.fb.nonNullable.control<string>(initialValue);
   }
 
   public makeDatepickerElementControl(initialValue: string = ''): FormControl<string> {
-    return this.fb.nonNullable.control(initialValue);
+    return this.fb.nonNullable.control<string>(initialValue);
   }
 
   public isInputElement(formField: FormField): formField is InputElement {

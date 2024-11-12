@@ -1,5 +1,6 @@
 export enum AppRoutes {
   CONSTRUCTOR = 'constructor',
+  FORM = 'form',
 }
 
 export enum AppLocalesList {

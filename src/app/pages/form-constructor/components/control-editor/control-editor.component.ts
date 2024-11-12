@@ -69,7 +69,6 @@ export class ControlEditorComponent implements OnInit {
     this.formElementService.form.events
       .pipe(
         tap(() => this.cdRef.markForCheck()),
-        tap(console.log),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();

@@ -1,0 +1,33 @@
+@use 'styles/mixins' as mixins;
+
+:host {
+  gap: mixins.rem(16);
+  flex: auto;
+  display: flex;
+  padding: 0 mixins.rem(32) mixins.rem(16);
+  overflow: auto;
+  flex-direction: column;
+
+  .form-display {
+    gap: mixins.rem(16);
+    padding: mixins.rem(16);
+    min-width: mixins.rem(720);
+    background: white;
+    border-radius: mixins.rem(4);
+  }
+
+  .form-header-text {
+    overflow: hidden;
+    max-width: mixins.rem(720);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  h4.form-header-text {
+    min-height: mixins.rem(40);
+  }
+
+  div.form-header-text {
+    min-height: mixins.rem(24);
+  }
+}
