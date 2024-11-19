@@ -8,7 +8,6 @@ import { DatepickerElementComponent } from '@app/pages/form-constructor/componen
 import { FormElementService } from '@app/pages/form-constructor/services/form-element.service';
 import { MatButton } from '@angular/material/button';
 import { InputElementSettingsComponent } from '@app/pages/form-constructor/components/input-element-settings/input-element-settings.component';
-import { FormConstructorActions } from '@app/pages/form-constructor/store/form-constructor.actions';
 import { SelectElementSettingsComponent } from '@app/pages/form-constructor/components/select-element-settings/select-element-settings.component';
 import { DatepickerElementSettingsComponent } from '@app/pages/form-constructor/components/datepicker-element-settings/datepicker-element-settings.component';
 import { tap } from 'rxjs';
@@ -19,6 +18,14 @@ import { UiDividerComponent } from '@core/components/ui-divider/ui-divider.compo
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import {
+  PatchDatepickerElementSettings,
+  PatchInputElementSettings,
+  PatchSelectElementSettings,
+  RemoveFormElement,
+  SetFormDescription,
+  SetFormTitle,
+} from '@app/pages/form-constructor/store/form-constructor.actions';
 
 @Component({
   selector: 'control-editor',
@@ -54,12 +61,12 @@ export class ControlEditorComponent implements OnInit {
   protected readonly formDescription = select(FormConstructorState.getFormDescription$);
   protected readonly formFieldList = select(FormConstructorState.getFormFieldList$);
 
-  protected readonly setFormTitle = dispatch(FormConstructorActions.SetFormTitle);
-  protected readonly setFormDescription = dispatch(FormConstructorActions.SetFormDescription);
-  protected readonly patchInputElementSettings = dispatch(FormConstructorActions.PatchInputElementSettings);
-  protected readonly patchSelectElementSettings = dispatch(FormConstructorActions.PatchSelectElementSettings);
-  protected readonly patchDatepickerElementSettings = dispatch(FormConstructorActions.PatchDatepickerElementSettings);
-  protected readonly removeFormElement = dispatch(FormConstructorActions.RemoveFormElement);
+  protected readonly setFormTitle = dispatch(SetFormTitle);
+  protected readonly setFormDescription = dispatch(SetFormDescription);
+  protected readonly patchInputElementSettings = dispatch(PatchInputElementSettings);
+  protected readonly patchSelectElementSettings = dispatch(PatchSelectElementSettings);
+  protected readonly patchDatepickerElementSettings = dispatch(PatchDatepickerElementSettings);
+  protected readonly removeFormElement = dispatch(RemoveFormElement);
 
   public ngOnInit(): void {
     this.initFormEventsSubscription();

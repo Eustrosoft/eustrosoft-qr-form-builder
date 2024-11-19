@@ -1,10 +1,21 @@
 import { inject, Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { FormElement, FormField, InputType } from '@app/pages/form-constructor/form-constructor.model';
-import { FormConstructorActions } from '@app/pages/form-constructor/store/form-constructor.actions';
 import { append, patch, removeItem, updateItem } from '@ngxs/store/operators';
 import { FormElementFactoryService } from '@app/pages/form-constructor/services/form-element-factory.service';
 import { FormElementService } from '@app/pages/form-constructor/services/form-element.service';
+import {
+  AddDatepickerElementToEditor,
+  AddInputElementToEditor,
+  AddSelectElementToEditor,
+  PatchDatepickerElementSettings,
+  PatchInputElementSettings,
+  PatchSelectElementSettings,
+  RemoveFormElement,
+  SerializeFormFieldList,
+  SetFormDescription,
+  SetFormTitle,
+} from '@app/pages/form-constructor/store/form-constructor.actions';
 
 export interface FormConstructorStateModel {
   formElementList: FormElement[];
@@ -45,14 +56,6 @@ export interface FormConstructorStateModel {
 })
 @Injectable()
 export class FormConstructorState {
-  /**
-   * TODO
-   *  Добавить режим предпросмотра формы
-   *  Добавить header как в qr-tiger
-   *  Продумать сериализацию формы
-   *  Сделать custom control из input-element, select-element, datepicker-element
-   */
-
   private readonly formElementFactoryService = inject(FormElementFactoryService);
   private readonly formElementService = inject(FormElementService);
 
@@ -81,8 +84,8 @@ export class FormConstructorState {
     return state.inputTypeOptionList;
   }
 
-  @Action(FormConstructorActions.SetFormTitle)
-  public setFormTitle(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.SetFormTitle): void {
+  @Action(SetFormTitle)
+  public setFormTitle(ctx: StateContext<FormConstructorStateModel>, action: SetFormTitle): void {
     ctx.setState(
       patch({
         formTitle: action.title,
@@ -90,8 +93,8 @@ export class FormConstructorState {
     );
   }
 
-  @Action(FormConstructorActions.SetFormDescription)
-  public setFormDescription(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.SetFormDescription): void {
+  @Action(SetFormDescription)
+  public setFormDescription(ctx: StateContext<FormConstructorStateModel>, action: SetFormDescription): void {
     ctx.setState(
       patch({
         formDescription: action.description,
@@ -99,8 +102,8 @@ export class FormConstructorState {
     );
   }
 
-  @Action(FormConstructorActions.AddInputElementToEditor)
-  public addInputElementToEditor(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.AddInputElementToEditor): void {
+  @Action(AddInputElementToEditor)
+  public addInputElementToEditor(ctx: StateContext<FormConstructorStateModel>, action: AddInputElementToEditor): void {
     const control = this.formElementService.makeInputElementControl();
     const element = this.formElementFactoryService.makeInputElement({ inputType: action.inputType, formControl: control });
     ctx.setState(
@@ -112,8 +115,8 @@ export class FormConstructorState {
     this.formElementService.form.addControl(`${element.controlElement}-${formFieldList.length - 1}`, control);
   }
 
-  @Action(FormConstructorActions.AddSelectElementToEditor)
-  public addSelectElementToEditor(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.AddSelectElementToEditor): void {
+  @Action(AddSelectElementToEditor)
+  public addSelectElementToEditor(ctx: StateContext<FormConstructorStateModel>, action: AddSelectElementToEditor): void {
     const control = this.formElementService.makeSelectElementControl();
     const element = this.formElementFactoryService.makeSelectElement({ optionList: action.optionList, formControl: control });
     ctx.setState(
@@ -125,8 +128,8 @@ export class FormConstructorState {
     this.formElementService.form.addControl(`${element.controlElement}-${formFieldList.length - 1}`, control);
   }
 
-  @Action(FormConstructorActions.AddDatepickerElementToEditor)
-  public addDatepickerElementToEditor(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.AddDatepickerElementToEditor): void {
+  @Action(AddDatepickerElementToEditor)
+  public addDatepickerElementToEditor(ctx: StateContext<FormConstructorStateModel>, action: AddDatepickerElementToEditor): void {
     const control = this.formElementService.makeDatepickerElementControl();
     const element = this.formElementFactoryService.makeDatepickerElement({ formControl: control });
     ctx.setState(
@@ -138,8 +141,8 @@ export class FormConstructorState {
     this.formElementService.form.addControl(`${element.controlElement}-${formFieldList.length - 1}`, control);
   }
 
-  @Action(FormConstructorActions.PatchInputElementSettings)
-  public patchInputElementSettings(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.PatchInputElementSettings): void {
+  @Action(PatchInputElementSettings)
+  public patchInputElementSettings(ctx: StateContext<FormConstructorStateModel>, action: PatchInputElementSettings): void {
     ctx.setState(
       patch({
         formFieldList: updateItem(
@@ -155,8 +158,8 @@ export class FormConstructorState {
     );
   }
 
-  @Action(FormConstructorActions.PatchSelectElementSettings)
-  public patchSelectElementSettings(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.PatchSelectElementSettings): void {
+  @Action(PatchSelectElementSettings)
+  public patchSelectElementSettings(ctx: StateContext<FormConstructorStateModel>, action: PatchSelectElementSettings): void {
     const optionList = action.settings.optionList
       .trim()
       .split(',')
@@ -177,8 +180,8 @@ export class FormConstructorState {
     );
   }
 
-  @Action(FormConstructorActions.PatchDatepickerElementSettings)
-  public patchDatepickerElementSettings(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.PatchDatepickerElementSettings): void {
+  @Action(PatchDatepickerElementSettings)
+  public patchDatepickerElementSettings(ctx: StateContext<FormConstructorStateModel>, action: PatchDatepickerElementSettings): void {
     ctx.setState(
       patch({
         formFieldList: updateItem(
@@ -193,13 +196,20 @@ export class FormConstructorState {
     );
   }
 
-  @Action(FormConstructorActions.RemoveFormElement)
-  public removeFormElement(ctx: StateContext<FormConstructorStateModel>, action: FormConstructorActions.RemoveFormElement): void {
+  @Action(RemoveFormElement)
+  public removeFormElement(ctx: StateContext<FormConstructorStateModel>, action: RemoveFormElement): void {
     this.formElementService.form.removeControl(`${action.controlElement}-${action.index}`);
     ctx.setState(
       patch({
         formFieldList: removeItem(action.index),
       }),
     );
+  }
+
+  @Action(SerializeFormFieldList)
+  public serializeFormFieldList(ctx: StateContext<FormConstructorStateModel>, action: SerializeFormFieldList): void {
+    const { formFieldList } = ctx.getState();
+    const serializedFormFieldList = formFieldList.map(({ formControl, ...rest }) => ({ ...rest, value: formControl.getRawValue() }));
+    console.log(serializedFormFieldList);
   }
 }

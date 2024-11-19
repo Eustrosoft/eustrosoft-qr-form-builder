@@ -1,6 +1,6 @@
 <flex-block>
   <button [routerLink]="['../', AppRoutes.FORM]" mat-flat-button>Preview</button>
-  <button mat-flat-button>Generate QR</button>
+  <button (click)="serializeFormFieldList()" mat-flat-button>Serialize</button>
 </flex-block>
 <div class="constructor">
   <control-preview-list />

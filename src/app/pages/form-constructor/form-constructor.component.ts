@@ -5,6 +5,8 @@ import { FlexBlockComponent } from '@core/components/flex-block/flex-block.compo
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { AppRoutes } from '@app/app.constant';
+import { dispatch } from '@ngxs/store';
+import { SerializeFormFieldList } from '@app/pages/form-constructor/store/form-constructor.actions';
 
 @Component({
   selector: 'form-constructor',
@@ -15,5 +17,6 @@ import { AppRoutes } from '@app/app.constant';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormConstructorComponent {
+  protected readonly serializeFormFieldList = dispatch(SerializeFormFieldList);
   protected readonly AppRoutes = AppRoutes;
 }

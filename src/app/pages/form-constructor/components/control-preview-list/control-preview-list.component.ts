@@ -3,9 +3,9 @@ import { dispatch, select } from '@ngxs/store';
 import { FormConstructorState } from '@app/pages/form-constructor/store/form-constructor.state';
 import { ControlElement } from '@app/pages/form-constructor/form-constructor.model';
 import { ControlPreviewComponent } from '@app/pages/form-constructor/components/control-preview/control-preview.component';
-import { FormConstructorActions } from '@app/pages/form-constructor/store/form-constructor.actions';
 import { MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
 import { FlexBlockComponent } from '@core/components/flex-block/flex-block.component';
+import { AddDatepickerElementToEditor, AddInputElementToEditor, AddSelectElementToEditor } from '@app/pages/form-constructor/store/form-constructor.actions';
 
 @Component({
   selector: 'control-preview-list',
@@ -18,9 +18,9 @@ import { FlexBlockComponent } from '@core/components/flex-block/flex-block.compo
 export class ControlPreviewListComponent {
   protected readonly formElementList = select(FormConstructorState.getFormElementList$);
 
-  protected readonly addInputToEditor = dispatch(FormConstructorActions.AddInputElementToEditor);
-  protected readonly addSelectToEditor = dispatch(FormConstructorActions.AddSelectElementToEditor);
-  protected readonly addDatepickerToEditor = dispatch(FormConstructorActions.AddDatepickerElementToEditor);
+  protected readonly addInputToEditor = dispatch(AddInputElementToEditor);
+  protected readonly addSelectToEditor = dispatch(AddSelectElementToEditor);
+  protected readonly addDatepickerToEditor = dispatch(AddDatepickerElementToEditor);
 
   protected addControlToEditor(event: ControlElement): void {
     switch (event) {
